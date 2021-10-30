@@ -24,18 +24,30 @@ namespace addressbook_web_tests3
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
-        public void Start()
+        public IWebDriver Driver
         {
-              driver = new FirefoxDriver();
-              baseURL = "http://localhost/addressbook";
-            //  verificationErrors = new StringBuilder();
+            get
+            {
+                return driver;
+            }
         }
+
+       /* public void Start()
+        {
+           //   driver = new FirefoxDriver();
+            //  baseURL = "http://localhost/addressbook";
+            //  verificationErrors = new StringBuilder();
+        } */
+
         public void Stop()
         {
             try
@@ -79,5 +91,7 @@ namespace addressbook_web_tests3
                 return contactHelper;
             }
         }
+
+        
     }
 }
