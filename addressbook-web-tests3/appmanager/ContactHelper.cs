@@ -81,13 +81,12 @@ namespace addressbook_web_tests3
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
-            //driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
             return this;
         }
 
         public ContactHelper SelectContact()
         {
-            driver.FindElement(By.Id("1")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']//tr[@name='entry']//input[@type='checkbox'][1]")).Click();
             return this;
         }
 
@@ -95,7 +94,6 @@ namespace addressbook_web_tests3
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
-            // Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
             return this;
         }
 
