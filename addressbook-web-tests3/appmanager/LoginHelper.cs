@@ -23,9 +23,9 @@ namespace addressbook_web_tests3
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
-        public void Logout()
+    /*    public void Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
-        }
+        } */
     }
 }
