@@ -30,6 +30,15 @@ namespace addressbook_web_tests3
         {
             manager.Navigator.GoToGroupsPage();
 
+            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[1]/input")))
+            {
+            }
+            else
+            {
+                GroupData emptyGroup = new GroupData("");
+                Create(emptyGroup);
+            }
+
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -41,6 +50,15 @@ namespace addressbook_web_tests3
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[1]/input")))
+            {
+            }
+            else
+            {
+                GroupData emptyGroup = new GroupData("");
+                Create(emptyGroup);
+            }
 
             SelectGroup(v);
             RemoveGroup();

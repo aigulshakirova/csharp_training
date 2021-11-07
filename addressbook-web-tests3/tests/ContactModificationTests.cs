@@ -15,7 +15,7 @@ namespace addressbook_web_tests3
         {
             ContactData newContactData = new ContactData("upd", null);
 
-            app.Contacts.Modify(2, newContactData);
+            app.Contacts.Modify(1, newContactData);
         }
     }
 }

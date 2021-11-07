@@ -28,6 +28,15 @@ namespace addressbook_web_tests3
 
         public ContactHelper Modify(int v, ContactData newContactData)
         {
+            if (IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][1]/td[8]/a/img[@title='Edit']")))
+            {
+            }
+            else
+            {
+                ContactData emptyContact = new ContactData("", "");
+                Create(emptyContact);
+            }
+
             InitContactEditing(v);
             FillContactForm(newContactData);
             SubmitContactModification();
@@ -37,6 +46,15 @@ namespace addressbook_web_tests3
 
         public ContactHelper Remove()
         {
+            if (IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][1]/td[8]/a/img[@title='Edit']")))
+            {
+            }
+            else
+            {
+                ContactData emptyContact = new ContactData("", "");
+                Create(emptyContact);
+            }
+
             SelectContact();
             RemoveContact();
           //  ReturnToHomePage();
@@ -74,7 +92,9 @@ namespace addressbook_web_tests3
 
         public ContactHelper InitContactEditing(int v)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/ td[8]/a/img[@title='Edit']")).Click();
+            //  driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/td[8]/a/img[@title='Edit']")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][" + v + "]/td[8]/a/img[@title='Edit']")).Click();
+
             return this;
         }
 

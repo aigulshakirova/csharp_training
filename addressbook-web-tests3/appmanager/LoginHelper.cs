@@ -37,14 +37,11 @@ namespace addressbook_web_tests3
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();
+                driver.FindElement(By.Name("user"));
             }
             
         }
 
-        /*    public void Logout()
-            {
-                driver.FindElement(By.LinkText("Logout")).Click();
-            } */
 
         public bool IsLoggedIn()
         {
