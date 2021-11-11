@@ -17,8 +17,11 @@ namespace addressbook_web_tests3
         {
         }
 
+
         public ContactHelper Create(ContactData contact)
         {
+            manager.Navigator.GoToHomePage();
+
             InitContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
@@ -26,16 +29,10 @@ namespace addressbook_web_tests3
             return this;
         }
 
+
         public ContactHelper Modify(int v, ContactData newContactData)
         {
-            if (IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][1]/td[8]/a/img[@title='Edit']")))
-            {
-            }
-            else
-            {
-                ContactData emptyContact = new ContactData("", "");
-                Create(emptyContact);
-            }
+            manager.Navigator.GoToHomePage();
 
             InitContactEditing(v);
             FillContactForm(newContactData);
@@ -46,15 +43,7 @@ namespace addressbook_web_tests3
 
         public ContactHelper Remove()
         {
-            if (IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][1]/td[8]/a/img[@title='Edit']")))
-            {
-            }
-            else
-            {
-                ContactData emptyContact = new ContactData("", "");
-                Create(emptyContact);
-            }
-
+            manager.Navigator.GoToHomePage();
             SelectContact();
             RemoveContact();
           //  ReturnToHomePage();
@@ -116,6 +105,36 @@ namespace addressbook_web_tests3
             driver.SwitchTo().Alert().Accept();
             return this;
         }
+
+        public void CheckContactExists()
+        {
+            manager.Navigator.GoToHomePage();
+
+            if (IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][1]/td[8]/a/img[@title='Edit']")))
+            {
+                return;
+            }
+            else
+            {
+                ContactData emptyContact = new ContactData("", "");
+                Create(emptyContact);
+            }
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                ContactData contact = new ContactData(element.Text, element.Text); // как разделить фамилию и имя?
+                contacts.Add(contact);
+                //groups.Add(new GroupData(element.Text));
+            }
+            return contacts;
+        }
+
 
     }
 }

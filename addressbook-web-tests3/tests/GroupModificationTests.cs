@@ -14,11 +14,19 @@ namespace addressbook_web_tests3
         [Test]
         public void GroupModificationTest()
         {
+            //prepare
+            app.Groups.CheckGroupExists();
+
+            //action
             GroupData newData = new GroupData("zzz");
             newData.Header = null;
             newData.Footer = null;
 
             app.Groups.Modify(1, newData);
+
+            //verification
+
+
         }
     }
 }

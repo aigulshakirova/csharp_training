@@ -30,15 +30,6 @@ namespace addressbook_web_tests3
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[1]/input")))
-            {
-            }
-            else
-            {
-                GroupData emptyGroup = new GroupData("");
-                Create(emptyGroup);
-            }
-
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -50,15 +41,6 @@ namespace addressbook_web_tests3
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (IsElementPresent(By.XPath("//div[@id='content']/form/span[1]/input")))
-            {
-            }
-            else
-            {
-                GroupData emptyGroup = new GroupData("");
-                Create(emptyGroup);
-            }
 
             SelectGroup(v);
             RemoveGroup();
@@ -116,6 +98,36 @@ namespace addressbook_web_tests3
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
+        }
+
+        public void CheckGroupExists()
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            if (IsElementPresent(By.CssSelector("span.group")))
+            {
+                return;
+            }
+            else
+            {
+                GroupData emptyGroup = new GroupData("");
+                Create(emptyGroup);
+            }
+            
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach(IWebElement element in elements)
+            {
+                GroupData group = new GroupData(element.Text);
+                groups.Add(group);
+                //groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
     }
 }
