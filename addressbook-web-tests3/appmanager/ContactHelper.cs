@@ -12,6 +12,8 @@ namespace addressbook_web_tests3
 {
     public class ContactHelper : HelperBase
     {
+        
+
         public ContactHelper(ApplicationManager manager)
             : base(manager)
         {
@@ -41,10 +43,10 @@ namespace addressbook_web_tests3
             return this;
         }
 
-        public ContactHelper Remove()
+        public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
-            SelectContact();
+            SelectContact(v);
             RemoveContact();
           //  ReturnToHomePage();
             return this;
@@ -82,7 +84,7 @@ namespace addressbook_web_tests3
         public ContactHelper InitContactEditing(int v)
         {
             //  driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/td[8]/a/img[@title='Edit']")).Click();
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][" + v + "]/td[8]/a/img[@title='Edit']")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][" + (v+1) + "]/td[8]/a/img[@title='Edit']")).Click();
 
             return this;
         }
@@ -93,9 +95,9 @@ namespace addressbook_web_tests3
             return this;
         }
 
-        public ContactHelper SelectContact()
+        public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']//tr[@name='entry']//input[@type='checkbox'][1]")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']//tr[@name='entry']//input[@type='checkbox']["+ (index+1) + "]")).Click();
             return this;
         }
 
@@ -121,20 +123,28 @@ namespace addressbook_web_tests3
             }
         }
 
+        private int i;
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            foreach (IWebElement element in elements)
+            ICollection<IWebElement> elementsLN = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
+            ICollection<IWebElement> elementsFN = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
+
+            for (i = 0; i < elementsFN.Count; i++)
             {
-                ContactData contact = new ContactData(element.Text, element.Text); // как разделить фамилию и имя?
+
+                ContactData contact = new ContactData(elementsFN.ElementAt(i).Text, elementsLN.ElementAt(i).Text);
                 contacts.Add(contact);
-                //groups.Add(new GroupData(element.Text));
+
+           /*     System.Console.WriteLine(contact.Firstname);
+                System.Console.WriteLine(contact.Lastname);
+                System.Console.WriteLine(""); */
             }
+
             return contacts;
+
         }
-
-
+       
     }
 }
