@@ -17,14 +17,14 @@
   <Class Name="addressbook_web_tests3.ContactHelper" Collapsed="true">
     <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAIAAACAAEAAAAAQAAJAEAAgAAAECAAAAQAAAAAgA=</HashCode>
+      <HashCode>AABAIAAACAAEAAAAAQAAJAEAAgAAAECAIAAQAAAAAgA=</HashCode>
       <FileName>appmanager\ContactHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="addressbook_web_tests3.GroupHelper" Collapsed="true">
     <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACIACAAABAAAAAAAAABAAAQAABMEAAAAAAAQBAAAA=</HashCode>
+      <HashCode>AAACIACAAABEAAAAAAAABAAAQAABMEAAAAAAAYBAAAA=</HashCode>
       <FileName>appmanager\GroupHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -49,7 +49,7 @@
       <FileName>tests\TestBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="addressbook_web_tests3.AuthTestBase">
+  <Class Name="addressbook_web_tests3.AuthTestBase" Collapsed="true">
     <Position X="0.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -101,7 +101,7 @@
   <Class Name="addressbook_web_tests3.GroupData" Collapsed="true">
     <Position X="4" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAQAAAAAAAAAgAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAAAAAQAAAAAAAQEgAAAAAQAAAAEAIAAAAAAAAAAAAA=</HashCode>
       <FileName>model\GroupData.cs</FileName>
       <NewMemberFileName>model\ContactData.cs</NewMemberFileName>
     </TypeIdentifier>
