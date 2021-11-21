@@ -41,6 +41,7 @@ namespace addressbook_web_tests3
             return this;
         }
 
+       
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
@@ -50,8 +51,7 @@ namespace addressbook_web_tests3
             return this;
         }
 
-      
-
+        
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -200,6 +200,81 @@ namespace addressbook_web_tests3
                 Email2 = email2,
                 Email3 = email3
             };
+        }
+
+        public string GetContactInformationFromDetailsPage(int v)
+        {
+            manager.Navigator.GoToHomePage();
+            ViewContactDetails(v);
+            string contentTable = driver.FindElement(By.Id("content")).Text.Trim();
+
+            //    System.Console.Out.Write(contentTable);
+
+            return contentTable;
+        }
+
+        public string GetContactInformationFromEditFormAsString(int v)
+        {
+            ContactData contact = GetContactInformationFromEditForm(v);
+            string phones = "";
+            string address = "";
+
+            if (contact.HomePhone == "" && contact.MobilePhone == "" && contact.WorkPhone == "")
+            {
+                phones = "";
+            } 
+            else if (contact.HomePhone == "" && contact.MobilePhone == "")
+            {
+                phones = "W: " + contact.WorkPhone + "\r\n" + "\r\n";
+            } 
+            else if (contact.HomePhone == "" && contact.WorkPhone == "")
+            {
+                phones = "M: " + contact.MobilePhone + "\r\n" + "\r\n";
+            } 
+            else if (contact.MobilePhone == "" && contact.WorkPhone == "")
+            {
+                phones = "H: " + contact.HomePhone + "\r\n" + "\r\n";
+            }
+            else if (contact.HomePhone == "")
+            {
+                phones = "M: " + contact.MobilePhone + "\r\n" + "W: " + contact.WorkPhone + "\r\n" + "\r\n";
+            }
+            else if (contact.MobilePhone == "")
+            {
+                phones = "H: " + contact.HomePhone + "\r\n" + "W: " + contact.WorkPhone + "\r\n" + "\r\n";
+            }
+            else if (contact.WorkPhone == "")
+            {
+                phones = "H: " + contact.HomePhone + "\r\n" + "M: " + contact.MobilePhone + "\r\n" + "\r\n";
+            }
+            else if (contact.HomePhone != "" && contact.MobilePhone != "" && contact.WorkPhone != "")
+            {
+                phones = "H: " + contact.HomePhone + "\r\n" + "M: " + contact.MobilePhone + "\r\n" + "W: " + contact.WorkPhone + "\r\n" + "\r\n";
+            }
+
+            if (contact.Address == "")
+            {
+                address = "";
+            }
+            else
+            {
+                address = contact.Address + "\r\n";
+            }
+
+            string contactInfoAll = contact.Firstname + " " + contact.Lastname + "\r\n" + address + "\r\n"
+                + phones
+                + contact.AllEmails;
+
+            //    System.Console.Out.Write(contactInfoAll);
+
+            return contactInfoAll.Trim();
+        }
+
+
+        public ContactHelper ViewContactDetails(int v)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry'][" + (v + 1) + "]/td[7]/a/img[@title='Details']")).Click();
+            return this;
         }
 
         public int GetNumberOfSearchResults()

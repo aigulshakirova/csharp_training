@@ -93,8 +93,8 @@ namespace addressbook_web_tests3
             {
                 return "";
             }
-            // return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+           // return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
         }
 
         public string Email1 { get; set; }
@@ -109,7 +109,37 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
+                    if (Email1 == "" && Email2 == "" && Email3 == "")
+                    {
+                        return "";
+                    }
+                    else if (Email1 == "" && Email2 == "")
+                    {
+                        return Email3;
+                    }
+                    else if (Email1 == "" && Email3 == "")
+                    {
+                        return Email2;
+                    }
+                    else if (Email2 == "" && Email3 == "")
+                    {
+                        return Email1;
+                    }
+                    else if (Email3 == "")
+                    {
+                        return Email1 + "\r\n" + Email2;
+                    }
+                    else if (Email2 == "")
+                    {
+                        return Email1 + "\r\n" + Email3;
+                    }
+                    else if (Email1 == "")
+                    {
+                        return Email2 + "\r\n" + Email3;
+                    }
+
                     return Email1 + "\r\n" + Email2 + "\r\n" + Email3;
+
                 }
             }
             set
