@@ -43,7 +43,7 @@ namespace addressbook_web_tests3
 
         public override string ToString()
         {
-            return "firstname=" + Firstname + "lastname=" + Lastname;
+            return "firstname=" + Firstname + "\nlastname=" + Lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -83,7 +83,14 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
-                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                    if(HomePhone != null && MobilePhone != null && WorkPhone != null)
+                    {
+                        return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                    }
+
+                    return null;
+                    
+                 //   return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
                 }
             }
             set{
@@ -113,7 +120,12 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
-                    if (Email1 == "" && Email2 == "" && Email3 == "")
+                    if (Email1 == null && Email2 == null && Email3 == null)
+                    {
+                        //      return Email1 + Email2 + Email3;
+                        return null;
+                    }
+                    else if (Email1 == "" && Email2 == "" && Email3 == "")
                     {
                         return "";
                     }
@@ -143,7 +155,6 @@ namespace addressbook_web_tests3
                     }
 
                     return Email1 + "\r\n" + Email2 + "\r\n" + Email3;
-
                 }
             }
             set

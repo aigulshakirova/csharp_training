@@ -13,8 +13,8 @@ namespace addressbook_web_tests3
         [Test]
         public void TestContactInformation()
         {
-            ContactData fromTable = app.Contacts.GetContactInformationFromTable(3);
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(3);
+            ContactData fromTable = app.Contacts.GetContactInformationFromTable(2);
+            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(2);
 
             // verification
             Assert.AreEqual(fromTable, fromForm);
@@ -26,8 +26,8 @@ namespace addressbook_web_tests3
         [Test]
         public void TestDetailedContactInformation()
         {
-            string infoFromDetailsPage = app.Contacts.GetContactInformationFromDetailsPage(0);
-            string infoFromEditForm = app.Contacts.GetContactInformationFromEditFormAsString(0);
+            string infoFromDetailsPage = app.Contacts.GetContactInformationFromDetailsPage(2);
+            string infoFromEditForm = app.Contacts.GetContactInformationFromEditFormAsString(2);
 
             //verification
             Assert.AreEqual(infoFromDetailsPage, infoFromEditForm);
