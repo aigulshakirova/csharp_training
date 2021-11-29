@@ -94,13 +94,11 @@ namespace addressbook_test_data_generators
         static void WriteContactsToXmlFile(List<ContactData> contacts, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
-            //throw new NotImplementedException();
         }
 
         static void WriteContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
         {
             writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
-            //throw new NotImplementedException();
         }
 
         static void WriteGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)

@@ -120,41 +120,11 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
-                    if (Email1 == null && Email2 == null && Email3 == null)
+                    if (Email1 != null && Email2 != null && Email3 != null)
                     {
-                        //      return Email1 + Email2 + Email3;
-                        return null;
+                        return CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3).Trim();
                     }
-                    else if (Email1 == "" && Email2 == "" && Email3 == "")
-                    {
-                        return "";
-                    }
-                    else if (Email1 == "" && Email2 == "")
-                    {
-                        return Email3;
-                    }
-                    else if (Email1 == "" && Email3 == "")
-                    {
-                        return Email2;
-                    }
-                    else if (Email2 == "" && Email3 == "")
-                    {
-                        return Email1;
-                    }
-                    else if (Email3 == "")
-                    {
-                        return Email1 + "\r\n" + Email2;
-                    }
-                    else if (Email2 == "")
-                    {
-                        return Email1 + "\r\n" + Email3;
-                    }
-                    else if (Email1 == "")
-                    {
-                        return Email2 + "\r\n" + Email3;
-                    }
-
-                    return Email1 + "\r\n" + Email2 + "\r\n" + Email3;
+                    return null;
                 }
             }
             set
@@ -163,5 +133,13 @@ namespace addressbook_web_tests3
             }
         }
 
+        private string CleanUpEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email + "\r\n";
+        }
     }
 }
