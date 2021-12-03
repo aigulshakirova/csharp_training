@@ -29,6 +29,7 @@ namespace addressbook_web_tests3
             return this;
         }
 
+        
 
         public ContactHelper Modify(int v, ContactData newContactData)
         {
@@ -41,7 +42,19 @@ namespace addressbook_web_tests3
             return this;
         }
 
-       
+        public ContactHelper Modify(ContactData oldContactData, ContactData newContactData)
+        {
+            manager.Navigator.GoToHomePage();
+
+            InitContactEditing(oldContactData.Id);
+            FillContactForm(newContactData);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
+        }
+
+        
+
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
@@ -51,7 +64,18 @@ namespace addressbook_web_tests3
             return this;
         }
 
-        
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+
+            SelectContact(contact.Id);
+            RemoveContact();
+            ReturnToHomePage();
+            return this;
+        }
+
+       
+
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -88,6 +112,13 @@ namespace addressbook_web_tests3
             return this;
         }
 
+        public ContactHelper InitContactEditing(string id)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry']//a[@href='edit.php?id="+id+"']")).Click();
+
+            return this;
+        }
+
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -98,6 +129,12 @@ namespace addressbook_web_tests3
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("//table[@id='maintable']//tr[@name='entry']//input[@type='checkbox']["+ (index+1) + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']//tr[@name='entry']//input[@type='checkbox' and @id='" + id + "']")).Click();
             return this;
         }
 
