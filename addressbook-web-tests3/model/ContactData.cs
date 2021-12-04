@@ -95,14 +95,7 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
-                    if(HomePhone != null && MobilePhone != null && WorkPhone != null)
-                    {
-                        return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
-                    }
-
-                    return null;
-                    
-                 //   return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                     return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
                 }
             }
             set{
@@ -137,11 +130,7 @@ namespace addressbook_web_tests3
                 }
                 else
                 {
-                    if (Email1 != null && Email2 != null && Email3 != null)
-                    {
-                        return CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3).Trim();
-                    }
-                    return null;
+                    return CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3).Trim();
                 }
             }
             set
