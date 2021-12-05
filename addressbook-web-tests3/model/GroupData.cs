@@ -81,7 +81,7 @@ namespace addressbook_web_tests3
             using (AddressBookDB db = new AddressBookDB())
             {
                 return (from c in db.Contacts
-                        from gcr in db.GCR.Where(p => p.GroupId == this.Id && p.ContactId == c.Id)
+                        from gcr in db.GCR.Where(p => p.GroupId == this.Id && p.ContactId == c.Id && c.Deprecated == "0000-00-00 00:00:00")
                         select c).Distinct().ToList();
             }
         }
