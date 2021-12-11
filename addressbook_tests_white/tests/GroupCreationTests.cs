@@ -25,8 +25,6 @@ namespace addressbook_tests_white
             newGroups.Sort();
 
             Assert.AreEqual(oldGroups, newGroups);
-
-
         }
     }
 }

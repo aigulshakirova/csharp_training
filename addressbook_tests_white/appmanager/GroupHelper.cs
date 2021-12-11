@@ -54,5 +54,21 @@ namespace addressbook_tests_white
             manager.MainWindow.Get<Button>("groupButton").Click();
             return  manager.MainWindow.ModalWindow(GROUPWINTITLE);
         }
+
+        public void Remove(GroupData toBeRemoved)
+        {
+            Window dialogue = OpenGroupsDialogue();
+            // select first element, press
+            Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+            TreeNode root = tree.Nodes[0];
+           // manager.MainWindow.Focus()
+           // manager.MainWindow.Focus((DisplayState)(ControlType.TreeItem));
+           //TextBox textBox = (TextBox)dialogue.Get(SearchCriteria.ByControlType(ControlType.TreeItem.));
+
+           // press Delete button
+           // press OK in opened window
+           CloseGroupsDialogue(dialogue);
+            //throw new NotImplementedException();
+        }
     }
 }

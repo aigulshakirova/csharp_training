@@ -25,6 +25,7 @@ namespace addressbook_tests_autoitx
             return list;
         }
 
+        
         public void Add(GroupData newGroup)
         {
             OpenGroupsDialogue();
@@ -43,6 +44,26 @@ namespace addressbook_tests_autoitx
         {
             aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d512");
             aux.WinWait(GROUPWINTITLE);
+            aux.WinActivate(GROUPWINTITLE);
+            aux.WinWaitActive(GROUPWINTITLE);
         }
+
+        public void Remove(int v)
+        {
+            OpenGroupsDialogue();
+            // focus on the group name in the list
+            aux.ControlTreeView(GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51", "Select", "#0|#" + v, "");
+            // press Delete button
+            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d51");
+            // press OK in module window to confirm group deletion
+            aux.WinWait("Delete group");
+            aux.WinActivate("Delete group");
+            aux.WinWaitActive("Delete group");
+            aux.ControlClick("Delete group", "", "WindowsForms10.BUTTON.app.0.2c908d53");
+
+            CloseGroupsDialogue();
+            // throw new NotImplementedException();
+        }
+
     }
 }
