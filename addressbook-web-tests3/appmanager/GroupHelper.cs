@@ -142,7 +142,7 @@ namespace addressbook_web_tests3
             }
             else
             {
-                GroupData emptyGroup = new GroupData("");
+                GroupData emptyGroup = new GroupData("empty");
                 Create(emptyGroup);
             }
             

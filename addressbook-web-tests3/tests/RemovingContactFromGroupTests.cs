@@ -12,9 +12,22 @@ namespace addressbook_web_tests3
         [Test]
         public void TestRemovingContactFromGroup()
         {
+            app.Contacts.CheckContactExists();
+            app.Groups.CheckGroupExists();
+
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = oldList[0];
+            ContactData contact;
+            if (oldList.Count == 0)
+            {
+                contact = ContactData.GetAll().First();
+                app.Contacts.AddContactToGroup(contact, group);
+                oldList.Add(contact);
+            }
+            else
+            {
+                contact = oldList[0];
+            }
 
             app.Contacts.RemoveContactFromGroup(contact, group);
 
