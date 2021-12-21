@@ -17,6 +17,9 @@ namespace mantis_tests
         protected string baseURL;
 
         public RegistrationHelper Registration { get; set; }
+        public LoginHelper Auth { get; private set; }
+        public MenuHelper Navigation { get; private set; }
+        public ProjectHelper Project { get; private set; }
         public FtpHelper Ftp { get; private set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
@@ -25,8 +28,11 @@ namespace mantis_tests
         {
             driver = new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
-            baseURL = "http://localhost/addressbook";
+            baseURL = "http://localhost/mantisbt-2.25.2/login_page.php";
             Registration = new RegistrationHelper(this);
+            Auth = new LoginHelper(this);
+            Navigation = new MenuHelper(this);
+            Project = new ProjectHelper(this);
             Ftp = new FtpHelper(this);
         }
 

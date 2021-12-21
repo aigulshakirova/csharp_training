@@ -19,25 +19,22 @@ namespace mantis_tests
             SubmitRegistration();
         }
 
-        private void OpenRegistrationForm()
+        public void OpenRegistrationForm()
         {
             driver.FindElement(By.CssSelector("a.back-to-login-link")).Click();
         }
 
-        private void SubmitRegistration()
+        public void SubmitRegistration()
         {
             driver.FindElement(By.CssSelector("input.btn")).Click();
         }
 
-        private void FillRegistrationForm(AccountData account)
+        public void FillRegistrationForm(AccountData account)
         {
             driver.FindElement(By.Name("username")).SendKeys(account.Name);
             driver.FindElement(By.Name("email")).SendKeys(account.Email);
         }
 
-        private void OpenMainPage()
-        {
-            manager.Driver.Url = "http://localhost/mantisbt-2.25.2/login_page.php";
-        }
+        
     }
 }

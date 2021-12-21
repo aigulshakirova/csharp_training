@@ -16,10 +16,10 @@ namespace mantis_tests
         public void SetUpConfig()
         {
             
-            app.Ftp.BackupFile(localPath + @"/config_inc.php"); // @"D:\xampp\htdocs\mantisbt-2.25.2\config" or "/config_inc.php"
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
+            app.Ftp.BackupFile("/config_inc.php"); // @"D:\xampp\htdocs\mantisbt-2.25.2\config" or "/config_inc.php"
+            using (Stream localFile = File.Open(localPath + @"/config_inc.php", FileMode.Open))
             {
-                app.Ftp.Upload(localPath + @"/config_inc.php", localFile); // @"D:\xampp\htdocs\mantisbt-2.25.2\config" or /config_inc.php
+                app.Ftp.Upload("/config_inc.php", localFile); // @"D:\xampp\htdocs\mantisbt-2.25.2\config" or /config_inc.php
             };
             
         }
