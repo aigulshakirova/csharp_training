@@ -21,6 +21,7 @@ namespace mantis_tests
         public MenuHelper Navigation { get; private set; }
         public ProjectHelper Project { get; private set; }
         public FtpHelper Ftp { get; private set; }
+        public AdminHelper Admin { get; private set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -28,12 +29,13 @@ namespace mantis_tests
         {
             driver = new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
-            baseURL = "http://localhost/mantisbt-2.25.2/login_page.php";
+            baseURL = "http://localhost/mantisbt-2.25.2";
             Registration = new RegistrationHelper(this);
             Auth = new LoginHelper(this);
             Navigation = new MenuHelper(this);
             Project = new ProjectHelper(this);
             Ftp = new FtpHelper(this);
+            Admin = new AdminHelper(this, baseURL);
         }
 
         ~ApplicationManager()
@@ -54,7 +56,7 @@ namespace mantis_tests
             if (! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.25.2/login_page.php"; 
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php"; // "http://localhost/mantisbt-2.25.2/login_page.php"; 
                 app.Value = newInstance;
                 
             }

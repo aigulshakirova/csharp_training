@@ -53,7 +53,9 @@ namespace mantis_tests
         {
             if (IsLoggedIn())
             {
-                driver.FindElement(By.LinkText("Выход")).Click();
+                // driver.FindElement(By.LinkText(" Выход")).Click();
+                driver.FindElement(By.XPath("//span[@class='user-info']")).Click();
+                driver.FindElement(By.XPath("//ul[contains(@class, 'user-menu')]//a[normalize-space(text()) = 'Выход']")).Click();
                 driver.FindElement(By.Name("username"));
             }
 
