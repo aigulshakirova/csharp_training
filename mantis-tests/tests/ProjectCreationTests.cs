@@ -15,11 +15,11 @@ namespace mantis_tests
         {
             ProjectData project = new ProjectData("test1");
 
-            List<ProjectData> oldProjects = app.Project.GetProjectsFromTable();
+            List<ProjectData> oldProjects = app.Project.GetProjectsFromAPI();
 
             app.Project.CreateNewProject(project);
 
-            List<ProjectData> newProjects = app.Project.GetProjectsFromTable();
+            List<ProjectData> newProjects = app.Project.GetProjectsFromAPI();
             Assert.AreEqual(oldProjects.Count + 1, newProjects.Count);
             oldProjects.Add(project);
             oldProjects.Sort();

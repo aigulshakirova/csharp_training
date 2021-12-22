@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -22,6 +23,16 @@ namespace mantis_tests
             SubmitProjectCreation();
             // "project is added" message
             //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CreateNewProjectAPI(ProjectData project)
+        {
+            AccountData account = new AccountData("administrator", "root");
+
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projectData = new Mantis.ProjectData();
+            projectData.name = project.Name;
+            client.mc_project_add(account.Name, account.Password, projectData);
         }
 
         public void DeleteProject(int index)
@@ -85,6 +96,32 @@ namespace mantis_tests
                 }
             }
             
+            return ProjectList;
+        }
+
+        public List<ProjectData> GetProjectsFromAPI()
+        {
+            AccountData account = new AccountData("administrator", "root");
+            List<ProjectData> ProjectList = new List<ProjectData>();
+
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            //   List<Mantis.ProjectData> projects = new List<Mantis.ProjectData>();
+            Mantis.ProjectData[] projectData = new Mantis.ProjectData()[];
+            projectData = client.mc_projects_get_user_accessible(account.Name, account.Password);
+
+
+         //   Mantis.ProjectData[] projectData = new Mantis.ProjectData(){client.mc_projects_get_user_accessible(account.Name, account.Password)};
+
+
+            int count = projectData.Length;
+
+            if (count > 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    ProjectList.Add(new ProjectData(projectData[i].name));
+                }
+            }
             return ProjectList;
         }
     }
