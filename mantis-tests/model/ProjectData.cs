@@ -11,13 +11,15 @@ namespace mantis_tests
 {
     public class ProjectData : IEquatable<ProjectData>, IComparable<ProjectData>
     {
-       
+        public string Name { get; set; }
+        public string Id { get; internal set; }
+
         public ProjectData(string projectName)
         {
             this.Name = projectName;
         }
 
-        public string Name { get; set; }
+        public ProjectData() { }
 
         public int CompareTo(ProjectData other)
         {
