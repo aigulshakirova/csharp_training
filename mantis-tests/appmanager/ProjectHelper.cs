@@ -105,12 +105,11 @@ namespace mantis_tests
             List<ProjectData> ProjectList = new List<ProjectData>();
 
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData[] projectData = client.mc_projects_get_user_accessible(account.Name, account.Password);
             //   List<Mantis.ProjectData> projects = new List<Mantis.ProjectData>();
-            Mantis.ProjectData[] projectData = new Mantis.ProjectData()[];
-            projectData = client.mc_projects_get_user_accessible(account.Name, account.Password);
-
-
-         //   Mantis.ProjectData[] projectData = new Mantis.ProjectData(){client.mc_projects_get_user_accessible(account.Name, account.Password)};
+            //   Mantis.ProjectData[] projectData = new Mantis.ProjectData()[];
+            //   projectData = client.mc_projects_get_user_accessible(account.Name, account.Password);
+            //   Mantis.ProjectData[] projectData = new Mantis.ProjectData(){client.mc_projects_get_user_accessible(account.Name, account.Password)};
 
 
             int count = projectData.Length;
